@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@open-wa/wa-automate": "^4.49.1",
+    "whatsapp-web.js": "^1.18.2"
+  }
+}
