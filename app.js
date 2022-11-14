@@ -10,6 +10,7 @@ var num = 0;
 var j = 0;
 var i = 0;
 var numbers = "0123456789";
+var currency, serviceFee, amount;
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 const TOKEN_PATH = 'token.json';
@@ -185,9 +186,23 @@ function start(client) {
                                     }
                                 }
                             }
-                            num = (parseInt(result) + 5) * 18;
-                            result = num.toString();
-                            client.sendText(message.from, "Send amount: ".concat("$ ", message.body, "\nService charge: $5 \nTotal: $", (num / 18).toString(), "\nExchange Rate R18.00 \nYou pay: R", result, "\n1. Accept \n2. Change amount \n3. No"));
+                            serviceFee = (parseFloat(result) * 0.05).toString();
+                            if(message.from.charAt(1) === "7"){
+                                currency = "R";
+                                num = (parseFloat(result) + (parseFloat(result) * 0.05)) * 18  ;
+                            }
+                            else if(message.from.charAt(1) === "4"){
+                                currency = "£";
+                                num = 0.85 *(parseFloat(result) + (parseFloat(result) * 0.05));
+                            }
+                            else{
+                                currency = "$";
+                                num = parseFloat(result) + (parseFloat(result) * 0.05);
+                            }
+                            
+                            amount = num.toString();
+
+                            client.sendText(message.from, "Send amount: ".concat("$ ",result , "\nService charge: 5% - ($",serviceFee,")" , "\nTotal: $", (parseFloat(result) + parseFloat(serviceFee)).toString(), " \nYou pay: ",currency, amount, "\n1. Accept \n2. Change amount \n3. No"));
                             //client.sendText(message.from, "Click the link below to make the transfer \n\n".concat("https://lavender-long-cerise.glitch.me/?product=", result, "\nReply with your phone number/email address so that we can track your payment"));
                             parseJson.users[i].order = "8";
                             parseJson.users[i].payment = result;
@@ -200,7 +215,21 @@ function start(client) {
                                     }
                                 }
                             }
-                            client.sendText(message.from, "Send amount: ".concat("R", message.body, "\nService charge: R50 \nTotal: R", (num / 20).toString(), " \nYou pay R", result, "\n1. Accept \n2. Change amount \n3. No"));
+                            serviceFee = parseFloat(result) * 0.05;
+                            if(message.from.charAt(1) === "7"){
+                                currency = "R";
+                                num = (parseFloat(result) + (parseFloat(result) * 0.05));
+                            }
+                            else if(message.from.charAt(1) === "4"){
+                                currency = "£";
+                                num = 0.049 * (parseFloat(result) + (parseFloat(result) * 0.05));
+                            }
+                            else{
+                                currency = "$";
+                                num = 0.058 * (parseFloat(result) + (parseFloat(result) * 0.05));
+                            }
+                            amount = num.toString();
+                            client.sendText(message.from, "Send amount: ".concat("R ",result , "\nService charge: 5% - (R",serviceFee,")" , "\nTotal: R", (parseFloat(result) + parseFloat(serviceFee)).toString(), " \nYou pay: ",currency, amount, "\n1. Accept \n2. Change amount \n3. No"));
                             //client.sendText(message.from, "Click the link below to make the transfer \n\n".concat("https://lavender-long-cerise.glitch.me/?product=", result, "\nReply with your phone number/email address so that we can track your payment"));
                             parseJson.users[i].order = "8";
                             parseJson.users[i].payment = result;
@@ -213,9 +242,22 @@ function start(client) {
                                     }
                                 }
                             }
-                            num = (parseInt(result) + 5) * 20  ;
-                            result = num.toString();
-                            client.sendText(message.from, "Send amount: ".concat("GBP ",message.body ,"\nService charge: GBP 5 \nTotal: GBP ", (num/20).toString()  ,"\nExchange Rate R20.00 \nYou pay R", result, "\n1. Accept \n2. Change amount \n3. No"));
+                            serviceFee = parseFloat(result) * 0.05;
+                            if(message.from.charAt(1) === "7"){
+                                currency = "R";
+                                num = (parseFloat(result) + (parseFloat(result) * 0.05)) * 20  ;
+                            }
+                            else if(message.from.charAt(1) === "4"){
+                                currency = "£";
+                                num = parseFloat(result) + (parseFloat(result) * 0.05);
+                            }
+                            else{
+                                currency = "$";
+                                num = 1.18 * (parseFloat(result) + (parseFloat(result) * 0.05));
+                            }
+                            
+                            amount = num.toString();
+                            client.sendText(message.from, "Send amount: ".concat("£ ",result , "\nService charge: 5% - (£",serviceFee,")" , "\nTotal: £", (parseFloat(result) + parseFloat(serviceFee)).toString(), " \nYou pay: ",currency, amount, "\n1. Accept \n2. Change amount \n3. No"));
                             //client.sendText(message.from, "Click the link below to make the transfer \n\n".concat("https://lavender-long-cerise.glitch.me/?product=", result, "\nReply with your phone number/email address so that we can track your payment"));
                             parseJson.users[i].order = "8";
                             parseJson.users[i].payment = result;
