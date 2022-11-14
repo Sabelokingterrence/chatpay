@@ -202,7 +202,7 @@ function start(client) {
                             
                             amount = num.toString();
 
-                            client.sendText(message.from, "Send amount: ".concat("$ ",result , "\nService charge: 5% - ($",serviceFee,")" , "\nTotal: $", (parseFloat(result) + parseFloat(serviceFee)).toString(), " \nYou pay: ",currency, amount, "\n1. Accept \n2. Change amount \n3. No"));
+                            client.sendText(message.from, "Send amount: ".concat("$ ",result , "\nService charge: $5 \nTotal: $", (parseFloat(result) + 5).toString(), " \nYou pay: ",currency, amount, "\n1. Accept \n2. Change amount \n3. No"));
                             //client.sendText(message.from, "Click the link below to make the transfer \n\n".concat("https://lavender-long-cerise.glitch.me/?product=", result, "\nReply with your phone number/email address so that we can track your payment"));
                             parseJson.users[i].order = "8";
                             parseJson.users[i].payment = result;
@@ -232,7 +232,7 @@ function start(client) {
                             client.sendText(message.from, "Send amount: ".concat("R ",result , "\nService charge: 5% - (R",serviceFee,")" , "\nTotal: R", (parseFloat(result) + parseFloat(serviceFee)).toString(), " \nYou pay: ",currency, amount, "\n1. Accept \n2. Change amount \n3. No"));
                             //client.sendText(message.from, "Click the link below to make the transfer \n\n".concat("https://lavender-long-cerise.glitch.me/?product=", result, "\nReply with your phone number/email address so that we can track your payment"));
                             parseJson.users[i].order = "8";
-                            parseJson.users[i].payment = result;
+                            parseJson.users[i].payment = amount;
                         }
                         else if (parseJson.users[i].exchange === "GBP") {
                             for (let i = 0; i < message.body.length; i++) {
@@ -260,7 +260,7 @@ function start(client) {
                             client.sendText(message.from, "Send amount: ".concat("£ ",result , "\nService charge: 5% - (£",serviceFee,")" , "\nTotal: £", (parseFloat(result) + parseFloat(serviceFee)).toString(), " \nYou pay: ",currency, amount, "\n1. Accept \n2. Change amount \n3. No"));
                             //client.sendText(message.from, "Click the link below to make the transfer \n\n".concat("https://lavender-long-cerise.glitch.me/?product=", result, "\nReply with your phone number/email address so that we can track your payment"));
                             parseJson.users[i].order = "8";
-                            parseJson.users[i].payment = result;
+                            parseJson.users[i].payment = amount;
                         }
                     }
                     else if (parseJson.users[i].order === "10") {
